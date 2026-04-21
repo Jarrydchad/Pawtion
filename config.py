@@ -2,10 +2,9 @@ import os
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "pawtion-super-secret-key-change-in-prod")
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "DATABASE_URL",
-        "postgresql://pawtion:pawtion123@localhost:5432/pawtion_db"
-    )
+    _db_url = os.getenv("DATABASE_URL", "postgresql://pawtion:pawtion123@localhost:5432/pawtion_db")
+    # Render provides postgres:// but SQLAlchemy requires postgresql://
+    SQLALCHEMY_DATABASE_URI = _db_url.replace("postgres://", "postgresql://", 1) if _db_url.startswith("postgres://") else _db_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "pawtion-jwt-secret-change-in-prod")
     JWT_ACCESS_TOKEN_EXPIRES = 86400  # 24 hours
