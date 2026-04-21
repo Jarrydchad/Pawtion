@@ -135,7 +135,11 @@ input:focus,select:focus{outline:none;border-color:var(--amber)!important;box-sh
 }
 `;
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:5000").replace(/\/$/, "");
+const API_BASE = (
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://127.0.0.1:5000"
+).replace(/\/$/, "");
 const TOKEN_KEY = "pawtion_token";
 
 async function apiRequest(path, { method = "GET", token, body } = {}) {
