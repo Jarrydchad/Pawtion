@@ -14,5 +14,5 @@ class Config:
     YOCO_WEBHOOK_SECRET = os.getenv("YOCO_WEBHOOK_SECRET", "")
 
     # Billing settings
-    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173").rstrip("/")
     LOW_STOCK_DAYS = int(os.getenv("LOW_STOCK_DAYS", "7"))  # trigger payment when this many days remain
